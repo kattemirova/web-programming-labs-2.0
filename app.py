@@ -177,4 +177,5 @@ def vostok():
 
 @app.route('/lab2/example')
 def example():
-    return render_template('example.html')
+    name = 'Темирова Екатерина, Пахомова Валерия'
+    return render_template('example.html', name=name)
