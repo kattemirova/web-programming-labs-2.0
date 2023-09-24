@@ -21,7 +21,10 @@ def menu():
 
         <h1>web-сервер на flask</h1>
             
-        <a href="/lab1">Первая лабораторая работа</a>
+        <ul>
+            <li><a href="/lab1">Первая лабораторая работа</a></li>
+            <li><a href = "/lab2">Вторая лабораторная работа</a></li>
+        </ul>
 
         <footer>
             &copy; Темирова, Пахомова, ФБИ-11, 3 курс, 2023
@@ -59,6 +62,7 @@ def lab1():
             <li><a href="/lab1/student">Студенты: /lab1/student</a></li>
             <li><a href="/lab1/python">Язык программирования Python: /lab1/python</a></li>
             <li><a href="/lab1/vostok">Уникальные растения Восточной России: /lab1/vostok</a></li>
+
         </ul>
 
         <footer>
