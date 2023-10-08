@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: gainsboro;
 }
 
 main{
@@ -7,10 +8,33 @@ main{
     padding: 10px;
 }
 
+
+h1 {
+    text-align: center;
+}
+
 img {
     height: 250px;
     width: 350px;
+    box-shadow: 0px 0px 15px 10px gray;
+    text-align: bottom;
 }
+
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgray;
+    text-align: center;
+    font-size: 14px;
+    padding: 8px 16px;
+    margin: 20px auto;
+    border: 1px solid;
+}
+
+.error {
+    text-decoration: dashed;
+    color: red;
+}
+
 
 header {
     margin-bottom: 30px;
@@ -28,3 +52,4 @@ footer {
     left: 0;
     right: 0;
 }
+
