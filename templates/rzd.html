@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{% block main %}
+    {% if user and age and viezd and vezd and data %}
+    <div class='ticket'>
+        <h2 style="text-align: center; width: auto; height: 30px; border: 1px soli; background-color: darkgrey; color: dimgrey;">Железнодорожный билет</h2>
+        <div>
+            <b class="info">ФИО пассажира: </b>{{ user }}<br><br>
+            <b class="info">Тип билета: </b>{{ tip }}<br><br>
+            <b class="info">Возраст пассажира: </b>{{ age }}<br><br>
+            <b class="info">Полка: </b>{{ polka }}<br><br>
+            <b class="info">Наличие багажа: </b>{{ bagaz }}<br><br>
+            <b class="info">Дата выезда: </b>{{ data }}<br><br>
+            <b class="info">Город отправления: </b>{{ viezd }}<br><br>
+            <b class="info">Город прибытия: </b>{{ vezd }}<br>
+        </div>
+   
+        <h2 style="text-align: right; width: auto; height: 30px; border: 1px soli; background-color: darkgrey; color: dimgrey;">Сумма к оплате: {{ price }} &#x20bd;</h2>
+    </div>
+
+    <div><a href="/lab3/rzd">Вернуться к оформлению</a></div>
+
+    {% else %}
+    <h1>Оформление железнодорожного билета</h1>
+
+    <form>
+
+        <h2>ФИО пассажира: </h2>
+        <label>
+            <input type="text" placeholder="ФИО" name="user" value="{{ user or '' }}">
+            <span class="error">{{ errors.user }}</span>
+        </label>
+
+        <h2>Тип билета: </h2>
+        <div>
+            <select name="tip">
+                <option value="Детский">Детский</option>
+                <option value="Взрослый">Взрослый</option>
+            </select>
+        </div>
+            
+        <h2>Ваш возраст: </h2>
+        <div>
+            <input type="number" name="age" value="{{ age or '' }}">
+            <span class="error">{{ errors.age }}</span>
+        </div> 
+
+        <h2>Полка: </h2>
+        <label>
+            <input type="radio" value="Нижняя полка" name="polka" checked>Нижняя полка
+        </label><br>
+        <label>
+            <input type="radio" value="Верхняя полка" name="polka">Верхняя полка
+        </label><br>
+        <label>
+            <input type="radio" value="Верхняя боковая полка" name="polka">Верхняя боковая полка
+        </label><br>
+        <label>
+            <input type="radio" value="Нижняя боковая полка" name="polka">Нижняя боковая полка 
+        </label>
+
+        <h2>Наличие багажа: </h2>
+        <label>
+            <input type="radio" value="Да" name="bagaz" checked>Есть багаж
+        </label><br>
+        <label>
+            <input type="radio" value="Нет" name="bagaz">Нет багажа
+        </label><br> 
+
+        <h2>Дата поездки: </h2>
+        <label>
+            <input type="date" name="data" value="{{ data or '' }}">
+            <span class="error">{{ errors.data }}</span>
+        </label>
+
+        <h2>Город отправления: </h2>
+        <label>
+            <input type="text" placeholder="Пункт выезда" name="viezd" value="{{ viezd or '' }}">
+            <span class="error">{{ errors.viezd }}</span>
+        </label>
+
+        <h2>Город прибытия: </h2>
+        <label>
+            <input type="text" placeholder="Пункт назначения" name="vezd" value="{{ vezd or '' }}">
+            <span class="error">{{ errors.vezd }}</span>
+        </label>
+
+        <div>
+            <button type="submit">Оформить билет</button>
+        </div>
+    </form>
+    {% endif %}
+{% endblock %}

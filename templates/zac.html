@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 2{% endblock %}
+
+{% block main %}
+    <h1>If16</h1>
+    {% if (a < b) %}
+        {% if (b < c) %}
+            {{ a*2 }}
+            {{ b*2 }}
+            {{ c*2 }}
+        {% endif %}
+    {% else %}
+        {{ -a }}
+        {{ -b }}
+        {{ -c }}
+    {% endif %}
+    <h1>FOR1</h1>
+    {% for n in range (N) %}
+        {{ K }}
+    {% endfor %}
+    <h1>FOR36</h1>
+    {% set sum = [] %}
+    {% for n in range (N) %}
+        {% set sum = sum.append(n**K) %}
+    {% endfor %}
+    {{ sum|sum }}
+{% endblock %}
