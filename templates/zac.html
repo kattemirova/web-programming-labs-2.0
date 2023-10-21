@@ -1,28 +1,26 @@
 {% extends "base.html" %}
 
-{% block lab %}Лабораторная работа 2{% endblock %}
+{% block lab %}Лабораторная работа 3{% endblock %}
 
 {% block main %}
-    <h1>If16</h1>
-    {% if (a < b) %}
-        {% if (b < c) %}
-            {{ a*2 }}
-            {{ b*2 }}
-            {{ c*2 }}
-        {% endif %}
-    {% else %}
-        {{ -a }}
-        {{ -b }}
-        {{ -c }}
-    {% endif %}
-    <h1>FOR1</h1>
-    {% for n in range (N) %}
-        {{ K }}
-    {% endfor %}
-    <h1>FOR36</h1>
-    {% set sum = [] %}
-    {% for n in range (N) %}
-        {% set sum = sum.append(n**K) %}
-    {% endfor %}
-    {{ sum|sum }}
+
+    <form action="/lab3/xx">
+        <label>x1</label><br>
+            <input type="int" name="x1" id="x1"><br>
+        <label>x2</label><br>
+            <input type="int" name="x2" id="x2"><br>
+        <label>x3</label><br>
+            <input type="int" name="x3" id="x3"><br>
+        <label>x4</label><br>
+            <input type="int" name="x4" id="x4"><br>
+        <label>x, n</label><br>
+
+            <input type="float" name="x" id="x"><br>
+            <input type="int" name="n" id="n"><br>
+        
+            <div>
+                <button type="submit">Посчитать</button>
+            </div>
+    </form>
+
 {% endblock %}
