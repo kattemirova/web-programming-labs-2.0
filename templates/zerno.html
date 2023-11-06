@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 4{% endblock %}
+
+{% block main %}
+    {% if zerno and weight %}
+    <h1>Заказ успешно сформирован</h1>
+    <div>Вы заказали: {{ zerno }}</div>
+    <div>Вес: {{ weight }} т.</div>
+    <div>Сумма к оплате: {{ price }} рублей</div>
+    <div>Скидка, примененная к заказу: {{ sk }} %</div>
+    <div>
+        <a href="/lab4/zerno">Заново</a>
+    </div>    
+    {% else %}
+    <div class="error">{{ error }}</div>
+    <form method="post">
+        <label>Зерно:</label>
+        <div>
+            <select name="zerno">
+                <option value="Ячмень">Ячмень</option>
+                <option value="Овес">Овес</option>
+                <option value="Пшеница">Пшеница</option>
+                <option value="Рожь">Рожь</option>
+            </select>
+        </div>
+        <label>Вес:</label><br>
+        <input type="number" name="weight" id="weight" value="{{ weight or '' }}">
+        <div>
+            <button type="submit">Оформить заказ</button>
+        </div>
+    </form>    
+    {% endif %}
+{% endblock %}

@@ -52,3 +52,36 @@ def cold():
         return render_template('coldsuc3.html', temperature=temperature)
     error = 'Задайте температуру'
     return render_template('cold.html', error=error, temperature=temperature)
+
+@lab4.route('/lab4/zerno', methods = ['GET', 'POST'])
+def zerno():
+    if request.method == 'GET':
+        return render_template('zerno.html')
+    price = 0 
+    sk = 0
+    weight = request.form.get('weight')
+    zerno = request.form.get('zerno')
+    if weight == '':
+        error = 'Введите вес'
+        return render_template('zerno.html', error=error, weight=weight)
+
+    if zerno == 'Ячмень':
+        price = 12000 * int(weight)
+    elif zerno == 'Овес':
+        price = 8500 * int(weight)
+    elif zerno == 'Пшеница':
+        price = 8700 * int(weight)
+    else:
+        price = 14000 * int(weight)
+
+    if int(weight) > 50:
+        price = price * 0.9
+        sk = 10
+    if int(weight) > 500:
+        error = 'Извините, в данный момент такого количества нет в наличии'
+        return render_template('zerno.html', error=error, weight=weight)
+    if int(weight) <= 0:
+        error = 'Неверное значение веса'
+        return render_template('zerno.html', error=error, weight=weight)
+
+    return render_template('zerno.html', sk=sk, price=price, zerno=zerno, weight=weight)
