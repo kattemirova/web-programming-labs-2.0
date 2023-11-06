@@ -29,3 +29,26 @@ def login():
     error = 'Неверный логин и/или пароль!'
     return render_template('login.html', error=error, username=username, password=password)
 
+@lab4.route('/lab4/cold', methods = ['GET', 'POST'])
+def cold():
+    if request.method == 'GET':
+        return render_template('cold.html')
+    temperature = request.form.get('temperature')
+    if temperature == '':
+        error = 'Ошибка: не задана температура'
+        return render_template('cold.html', error=error, temperature=temperature)
+
+    if int(temperature) < -12:
+        error = 'Не удалось установить температуру - слишком низкое значение'
+        return render_template('cold.html', error=error, temperature=temperature)
+    if int(temperature) > -1:
+        error = 'Не удалось установить температуру - слишком высокое значение'
+        return render_template('cold.html', error=error, temperature=temperature)
+    if int(temperature) >= -12 and int(temperature) <= -9:
+        return render_template('coldsuc1.html', temperature=temperature)
+    if int(temperature) >= -8 and int(temperature) <= -5:
+        return render_template('coldsuc2.html', temperature=temperature)
+    if int(temperature) >= -4 and int(temperature) <= -1:
+        return render_template('coldsuc3.html', temperature=temperature)
+    error = 'Задайте температуру'
+    return render_template('cold.html', error=error, temperature=temperature)
