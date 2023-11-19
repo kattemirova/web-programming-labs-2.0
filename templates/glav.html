@@ -3,12 +3,14 @@
 {% block lab %}Лабораторная работа 5{% endblock %}
 
 {% block main %}
-    <h1 style="text-align: left;">База знаний</h1>
-    <div class="glav">
-        <div>Просмотреть заметки</div>
-        <div>Создать заметку</div>
-        <div>Вход</div>
-        <div>Регистрация</div>
-        <div>{{ username }}</div>
+    <div class="glavdiv">
+        <ul class="ul">
+            <li class="glav", style="float: left;"><h2>База знаний</h2></li>
+            <li class="glav"><p>Просмотреть заметки</p></li>
+            <li class="glav"><p>Создать заметку</p></li>
+            <li class="glav", style="float: right;"><p>{{ username }}</p></li>
+            <li class="glav", style="float: right; border: 1px solid #ffecd5; padding-left: 5px; padding-right: 5px; background-color: #ffecd5;"><p>Регистрация</p></li>
+            <li class="glav", style="float: right; border: 1px solid; padding-left: 15px; padding-right: 15px;"><p>Вход</p></li>
+        </ul>
     </div>
 {% endblock %}
