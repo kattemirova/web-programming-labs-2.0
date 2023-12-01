@@ -1,16 +1,34 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Темирова Екатерина, Пахомова Валерия. {% block lab %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <div class="glavdiv">
+            <ul class="ul">
+                <li class="glav", style="float: left;"><h2>База знаний</h2></li>
+                <li class="glav"><a href="/lab5/show"><p>Просмотреть свои заметки</p></a></li>
+                <li class="glav"><a href="/lab5/public_articles"><p>Статьи</p></a></li>
+                <li class="glav"><a href="/lab5/new_article"><p>Создать заметку</a></p></li>
+                <li class="glav", style="float: right;"><p>{{ username }}</p></li>
+                <li class="glav", style="float: right; border: 1px solid #ffecd5; padding-left: 5px; padding-right: 5px; background-color: gainsboro;"><a href="/lab5/register"><p>Регистрация</a></p></li>
+                <li class="glav", style="float: right; border: 1px solid; padding-left: 15px; padding-right: 15px;"><a href="/lab5/logout"><p>Выход</a></p></li>
+                <li class="glav", style="float: right; border: 1px solid; padding-left: 15px; padding-right: 15px;"><a href="/lab5/login"><p>Вход</a></p></li>
+            </ul>
+        </div>
+    </header>
+    
+    <main>
+        {% block main %}{% endblock %}
+    </main>
 
-{% block lab %}Лабораторная работа 5{% endblock %}
+    <footer>
+        &copy; Темирова Екатерина, Пахомова Валерия, ФБИ-11, 3 курс, 2023
+    </footer>
+</body>
+</html>
 
-{% block main %}
-    <div class="glavdiv">
-        <ul class="ul">
-            <li class="glav", style="float: left;"><h2>База знаний</h2></li>
-            <li class="glav"><a href="/lab5/articles"><p>Просмотреть заметки</p></a></li>
-            <li class="glav"><a href="/lab5/new_article"><p>Создать заметку</a></p></li>
-            <li class="glav", style="float: right;"><p>{{ username }}</p></li>
-            <li class="glav", style="float: right; border: 1px solid #ffecd5; padding-left: 5px; padding-right: 5px; background-color: #ffecd5;"><a href="/lab5/register"><p>Регистрация</a></p></li>
-            <li class="glav", style="float: right; border: 1px solid; padding-left: 15px; padding-right: 15px;"><a href="/lab5/login"><p>Вход</a></p></li>
-        </ul>
-    </div>
-{% endblock %}

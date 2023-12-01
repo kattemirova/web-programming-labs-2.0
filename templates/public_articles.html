@@ -1,0 +1,32 @@
+{% extends "glav.html" %}
+
+{% block main %}
+
+<h1>Опубликованные статьи</h1>
+<ul>
+    {% for article in public_articles %}
+        <li>
+            <h2>{{ article[1] }}</h2>
+            <form action="/lab5/like_article/{{ article[0] }}" method="post">
+                {% if article[3] %}
+                    <button type="submit">Убрать лайк&#128148;</button>
+                {% else %}
+                    <button type="submit">Лайкнуть&#129392;</button>
+                {% endif %}
+                {{ article[4] }} человек(а) лайкнули эту статью
+            </form>
+            <form action="/lab5/favorite_article/{{ article[0] }}" method="post">
+                {% if article[2] %}
+                    <button type="submit">Удалить из избранного</button>
+                {% else %}
+                    <button type="submit">Добавить в избранное</button>
+                {% endif %}
+            </form>
+
+            
+
+            <a href="/lab5/articles/{{ article[0] }}">Читать статью</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

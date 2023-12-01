@@ -53,7 +53,7 @@ def registerPage():
     conn = dbConnect()
     cur = conn.cursor()
 
-    cur.execute(f"SELECT username FROM users WHERE username = '{username}';")
+    cur.execute("SELECT username FROM users WHERE username = %s", (username,))
 
     if cur.fetchone() is not None:
         errors.append("Пользователь с данным именем уже существует")
@@ -63,7 +63,7 @@ def registerPage():
         
         return render_template("register.html", errors=errors)
 
-    cur.execute(f"INSERT INTO users (username, password) VALUES ('{username}','{hashPassword}');")
+    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashPassword))
 
     conn.commit()
     conn.close()
@@ -88,7 +88,7 @@ def login():
     conn = dbConnect()
     cur = conn.cursor()
 
-    cur.execute(f"SELECT id, password FROM users WHERE username = '{username}'")
+    cur.execute("SELECT id, password FROM users WHERE username = %s", (username,))
 
     result = cur.fetchone()
 
@@ -114,23 +114,30 @@ def createArticle():
     errors =[]
 
     userID = session.get("id")
+    is_public = request.form.get("is_public")
+    if is_public == "public":
+        is_public = True
+    else:
+        is_public = False
+
 
     if userID is not None:
         if request.method == "GET":
-            return render_template("new_article.html")
+            return render_template("new_article.html", username=session.get("username"))
         
         if request.method == "POST":
             text_article = request.form.get("text_article")
             title = request.form.get("title_article")
+            is_public = request.form.get("is_public")
 
             if len(text_article) == 0:
                 errors.append('Заполните текст')
-                return render_template("new_article.html", errors=errors)
+                return render_template("new_article.html", errors=errors, username=session.get("username"))
 
             conn = dbConnect()
             cur = conn.cursor()
 
-            cur.execute(f"INSERT INTO articles(user_id, title, article_text) VALUES ('{userID}', '{title}', '{text_article}') RETURNING id")
+            cur.execute("INSERT INTO articles(user_id, title, article_text, is_public) VALUES (%s, %s, %s, %s) RETURNING id", (userID, title, text_article, is_public))
 
             new_article_id = cur.fetchone()[0]
             conn.commit()
@@ -147,9 +154,10 @@ def getArticle(article_id):
 
     if userID is not None:
         conn = dbConnect()
-        cur = conn. cursor()
+        cur = conn.cursor()
 
-        cur.execute(f"SELECT title, article_text FROM articles WHERE id = %s and user_id = %s", (article_id, userID))
+        cur.execute("SELECT title, article_text FROM articles WHERE id = %s", (article_id,))
+
 
         articleBody = cur.fetchone()
 
@@ -161,3 +169,110 @@ def getArticle(article_id):
         text = articleBody[1].splitlines()
 
         return render_template("articles.html", article_text=text, article_title=articleBody[0], username=session.get("username"))
+
+@lab5.route("/lab5/show")
+def showZam():
+    userID = session.get("id")
+
+    if userID is not None:
+        
+        conn = dbConnect()
+        cur = conn.cursor()
+
+        cur.execute("SELECT id, title FROM articles WHERE user_id = %s", (userID,))
+
+        articles = cur.fetchall()
+
+        conn.commit()
+      
+        dbClose(cur, conn)
+
+        return render_template("show.html", articles=articles, username=session.get("username"))
+      
+
+    return redirect("/lab5/login")  
+
+@lab5.route("/lab5/logout")
+def Razlog():
+    session.clear()
+    return redirect("/lab5/login")
+
+@lab5.route('/lab5/public_articles')
+def publicArticles():
+    userID = session.get("id")
+    if userID is not None:
+        conn = dbConnect()
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT 
+                articles.id, 
+                articles.title, 
+                CASE WHEN favorites.article_id IS NOT NULL THEN true ELSE false END as is_favorite, 
+                CASE WHEN likess.article_id IS NOT NULL THEN true ELSE false END as is_liked, 
+                articles.likes as like_count
+            FROM 
+                articles 
+                LEFT JOIN favorites ON articles.id = favorites.article_id AND favorites.user_id = %s
+                LEFT JOIN likess ON articles.id = likess.article_id AND likess.user_id = %s
+            WHERE articles.is_public = true
+            ORDER BY is_favorite DESC, articles.id DESC""", (userID, userID))
+        public_articles = cur.fetchall()
+
+        dbClose(cur, conn)
+        return render_template('public_articles.html', public_articles=public_articles, username=session.get("username"))
+    return redirect("/lab5/login")  
+
+@lab5.route('/lab5/favorite_article/<int:article_id>', methods=['POST'])
+def favoriteArticle(article_id):
+    userID = session.get("id")
+    if userID is not None:
+        conn = dbConnect()
+        cur = conn.cursor()  
+        cur.execute("SELECT id FROM favorites WHERE user_id = %s AND article_id = %s", (userID, article_id))
+        favorite_entry = cur.fetchone()
+
+        if favorite_entry is None:  
+            cur.execute("INSERT INTO favorites (user_id, article_id, is_favorite) VALUES (%s, %s, true)", (userID, article_id))
+            conn.commit() 
+
+        else:
+            cur.execute("DELETE FROM favorites WHERE user_id = %s AND article_id = %s", (userID, article_id))
+            conn.commit()
+
+        dbClose(cur, conn)
+
+        return redirect('/lab5/public_articles')
+  
+    return redirect("/lab5/login")
+
+
+
+@lab5.route('/lab5/like_article/<int:article_id>', methods=['POST'])
+def likeArticle(article_id):
+    userID = session.get("id")
+    if userID is not None:
+        conn = dbConnect()
+        cur = conn.cursor()  
+        cur.execute("SELECT id FROM likess WHERE user_id = %s AND article_id = %s", (userID, article_id))
+        like_entry = cur.fetchone()
+
+        if like_entry is None:  
+            cur.execute("INSERT INTO likess (user_id, article_id) VALUES (%s, %s)", (userID, article_id))
+            conn.commit()  
+           
+            cur.execute("UPDATE articles SET likes = COALESCE(likes, 0) + 1 WHERE id = %s", (article_id,))
+        else:
+            cur.execute("DELETE FROM likess WHERE user_id = %s AND article_id = %s", (userID, article_id))
+            conn.commit()
+        
+            cur.execute("UPDATE articles SET likes = COALESCE(likes, 0) - 1 WHERE id = %s", (article_id,))
+
+        conn.commit()
+
+        dbClose(cur, conn)
+
+        return redirect('/lab5/public_articles')
+  
+    return redirect("/lab5/login")
+
+
