@@ -1,0 +1,28 @@
+{% extends "glav_orm.html" %}
+
+{% block main %}
+    <h1>Опубликованные статьи</h1>
+    <ul>
+    {% for article in public_articles %}
+        <li>
+            <h2>{{ article.title }}</h2>
+            <form action="/lab6/like_article/{{ article.id }}" method="post">
+                {% if article.liked_by_current_user %}
+                    <button type="submit">Убрать лайк &#128148;</button>
+                {% else %}
+                    <button type="submit">Лайкнуть &#129392;</button>
+                {% endif %}
+                {{ article.like_count }} человек(а) лайкнули эту статью
+            </form>
+            <form action="/lab6/favorite_article/{{ article.id }}" method="post">
+                {% if article.favorited_by_current_user %}
+                    <button type="submit">Удалить из избранного</button>
+                {% else %}
+                    <button type="submit">Добавить в избранное</button>
+                {% endif %}
+            </form>
+            <a href="/lab6/articles/{{ article.id }}">Читать статью</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

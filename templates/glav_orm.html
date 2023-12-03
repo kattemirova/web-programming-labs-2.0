@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Темирова Екатерина, Пахомова Валерия. {% block lab %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <div class="glavdiv">
+            <ul class="ul">
+                <li class="glav", style="float: left;"><h2>База знаний</h2></li>
+                <li class="glav"><a href="/lab6/articles"><p>Просмотреть свои заметки</p></a></li>
+                <li class="glav"><a href="/lab6/public_articles"><p>Статьи</p></a></li>
+                <li class="glav"><a href="/lab6/new_article"><p>Создать заметку</a></p></li>
+                <li class="glav", style="float: right;"><p>{{ username }}</p></li>
+                <li class="glav", style="float: right; border: 1px solid #ffecd5; padding-left: 5px; padding-right: 5px; background-color: gainsboro;"><a href="/lab6/register"><p>Регистрация</a></p></li>
+                <li class="glav", style="float: right; border: 1px solid; padding-left: 15px; padding-right: 15px;"><a href="/lab6/logout"><p>Выход</a></p></li>
+                <li class="glav", style="float: right; border: 1px solid; padding-left: 15px; padding-right: 15px;"><a href="/lab6/login"><p>Вход</a></p></li>
+            </ul>
+        </div>
+    </header>
+    
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+    <footer>
+        &copy; Темирова Екатерина, Пахомова Валерия, ФБИ-11, 3 курс, 2023
+    </footer>
+</body>
+</html>

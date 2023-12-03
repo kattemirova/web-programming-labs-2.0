@@ -1,0 +1,14 @@
+{% extends "glav_orm.html" %}
+
+{% block main %}
+    <h1>Новая заметка</h1>
+    <div class="error">{{ errors }}</div>
+    <form method="POST">
+        <input name="title_article" type="text" placeholder="Название статьи">
+        <textarea name="text_article" placeholder="Текст статьи" rows="20"></textarea>            
+        <input type="checkbox" name="is_public" id="is_public" value="true">
+        <label for="is_public">Показывать другим пользователям</label>
+        <input type="submit" value="Apply">
+    </form>
+
+{% endblock %}
