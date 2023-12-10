@@ -1,6 +1,5 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Blueprint, render_template, request, redirect, session
-from flask_session import Session
 import psycopg2
 
 lab5 = Blueprint('lab5', __name__)
@@ -30,7 +29,6 @@ def users():
     cur.execute("SELECT username FROM users")
     users = [row[0] for row in cur.fetchall()]
     dbClose(cur, conn)
-
 
     return render_template('users.html', users=users)
 
