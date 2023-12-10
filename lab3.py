@@ -1,4 +1,5 @@
-from flask import Blueprint, redirect, url_for, render_template, request
+from math import factorial
+from flask import Blueprint, redirect, url_for, render_template, request 
 lab3 = Blueprint('lab3', __name__)
 
 
@@ -55,9 +56,7 @@ def rzd():
     user = request.args.get('user')
     if user == '':
         errors['user'] = 'Заполните поле!'
-     
-   
-
+        
     viezd = request.args.get('viezd')
     if viezd == '':
         errors['viezd'] = 'Заполните поле!'
@@ -104,7 +103,33 @@ def rzd():
 
     return render_template('rzd.html', price=price, errors=errors, user=user, age=age, viezd=viezd, vezd=vezd, data=data, tip=tip, polka=polka, bagaz=bagaz)
     
-    
 
+@lab3.route('/lab3/zac')
+def zac():
+    return render_template ('zac.html')
 
+@lab3.route('/lab3/xx')
+def xx():
+    x1 = request.args.get('x1')
+    x2 = request.args.get('x2')
+    x3 = request.args.get('x3')
+    x4 = request.args.get('x4')
+    x = float(request.args.get('x'))
+    n = int(request.args.get('n'))
+ 
+    if (x1 == x2 == x3):
+        a = 4
+    elif (x1 == x2 == x4):
+        a = 3
+    elif (x1 == x3 == x4):
+        a = 2
+    else:
+        a = 1
+
+    res = 0
+    for i in range(n+1):
+        nn = (-1)**i * x**(2*i+1)
+        fac = factorial(2*i+1)
+        res += nn / fac
+    return render_template('xx.html', a=a, res=res)
 

@@ -5,6 +5,7 @@ from Db import db
 from sqlalchemy import desc
 from flask_login import login_user, login_required, logout_user, current_user
 from Db.models import users, articles, favorites, likes
+import string
 
 lab6 = Blueprint('lab6', __name__)
 
@@ -158,4 +159,6 @@ def likeArticle(article_id):
         article.likes = db.func.coalesce(articles.likes, 0) - 1
     db.session.commit()
     return redirect('/lab6/public_articles')
+
+    
 

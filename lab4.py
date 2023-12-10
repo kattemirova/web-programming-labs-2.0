@@ -8,7 +8,6 @@ def lab():
 
 @lab4.route('/lab4/login', methods = ['GET', 'POST'])
 def login():
-
     if request.method == 'GET':
         return render_template('login.html')
 
@@ -33,7 +32,9 @@ def login():
 def cold():
     if request.method == 'GET':
         return render_template('cold.html')
+
     temperature = request.form.get('temperature')
+
     if temperature == '':
         error = 'Ошибка: не задана температура'
         return render_template('cold.html', error=error, temperature=temperature)
@@ -50,6 +51,7 @@ def cold():
         return render_template('coldsuc2.html', temperature=temperature)
     if int(temperature) >= -4 and int(temperature) <= -1:
         return render_template('coldsuc3.html', temperature=temperature)
+
     error = 'Задайте температуру'
     return render_template('cold.html', error=error, temperature=temperature)
 
@@ -57,10 +59,12 @@ def cold():
 def zerno():
     if request.method == 'GET':
         return render_template('zerno.html')
+
     price = 0 
     sk = 0
     weight = request.form.get('weight')
     zerno = request.form.get('zerno')
+
     if weight == '':
         error = 'Введите вес'
         return render_template('zerno.html', error=error, weight=weight)
@@ -94,19 +98,19 @@ def cookies():
     color = request.form.get('color')
     background_color = request.form.get('background_color')
     font_size = request.form.get('font_size')
+
     if color == background_color:
         error = 'Цвет текста и цвет фона должны отличаться'
         return render_template('cookies.html', error=error)
     if not 5 <= int(font_size) <= 30:
         error = 'Размер текста должен быть от 5рх до 30рх'
         return render_template('cookies.html', error=error)
+
     headers = [
     ('Set-Cookie', 'color=' + color + '; path=/'),
     ('Set-Cookie', 'background_color=' + background_color + '; path=/'),
     ('Set-Cookie', 'font_size=' + font_size + '; path=/'),
     ('Location', '/lab4/cookies')
     ]
-   
-    
     
     return '', 303, headers
