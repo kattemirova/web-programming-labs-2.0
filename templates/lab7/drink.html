@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 7{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='lab7/drink.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+   
+    <h1>Заказ напитка</h1>
+
+    <h2>Напиток:</h2>
+    <label>
+        <input type="radio" value="cofee" name="drink" checked>Кофе -120 рублей
+    </label><br>
+    <label>
+        <input type="radio" value="black-tea" name="drink">Черный чай - 80 рублей
+    </label><br>
+    <label>
+        <input type="radio" value="green-tea" name="drink">Зеленый чай - 70 рублей
+    </label>
+
+    <h2>Добавки:</h2>
+    <label>
+        <input type="checkbox" name="milk">Молоко - 30 рублей
+    </label><br>
+    <label>
+        <input type="checkbox" name="sugar">Сахар - 10 рублей
+    </label>
+
+    <div>
+        <button onclick="getPrice()">Рассчитать цену</button>
+    </div>
+
+    <div id="price"></div>
+
+    <div id="pay" style="display: none;">
+        <div>Номер банковской карты:</div>
+        <label>
+            <input type="text" name="card_num">
+        </label>
+
+        <div>Имя держателя карты:</div>
+        <label>
+            <input type="text" name="name">
+        </label>
+
+        <div>Номер CVV:</div>
+        <label>
+            <input type="text" name="cvv" size="3">
+        </label>
+
+        <div>
+            <button onclick="pay()">Оплатить</button>
+        </div>
+    </div>
+
+    <div id="error"></div>
+    <div id="result"></div>
+
+{% endblock %}
+

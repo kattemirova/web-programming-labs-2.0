@@ -16,6 +16,7 @@
        
     </style>
     {% endif %}
+    {% block script %}{% endblock %}
 </head>
 <body>
     <header>
@@ -27,9 +28,10 @@
         <a href = "/menu">Меню</a>
         {% block main %}{% endblock %}
     </main>
-
+    
     <footer>
         &copy; Темирова Екатерина, Пахомова Валерия, ФБИ-11, 3 курс, 2023
     </footer>
+
 </body>
 </html>
