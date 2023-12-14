@@ -9,12 +9,13 @@
 {% block main %}
     <h1>Список курсов</h1>
 
-    <table>
+    <table style="text-align: center;">
         <thead>
             <tr>
                 <th>Название</th>
                 <th>Количество видеороликов</th>
                 <th>Цена</th>
+                <th>Дата</th>
                 <th>Действие</th>
             </tr>
         </thead>
@@ -44,6 +45,11 @@
         <label>
             Цена:
             <input type="number" id="price" min="0">
+        </label><br>
+
+        <label>
+            Дата:
+            <input type="text" id="creation_date">
         </label><br>
 
         <button onclick="sendCourse()">ОК</button>
