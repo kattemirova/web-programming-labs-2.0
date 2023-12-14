@@ -77,6 +77,17 @@ p {
     
 }
 
+.modal {
+    display: none;
+    z-index: 100;
+    box-shadow: 3px 3px 5px black;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+    position: relative;
+    padding: 20px;
+}
+
 header {
     margin-bottom: 30px;
     padding: 20px;
