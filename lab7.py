@@ -19,10 +19,10 @@ def api():
 
     if data['method'] == 'get-price':
         return get_price(data['params'])
-
     if data['method'] == 'pay':
-        return Pay(data['params'])
-
+        return pay(data['params'])
+    if data['method'] == 'refund':
+        return refund(data['params'])
     abort(400)
 
 
@@ -50,7 +50,7 @@ def calculate_price(params):
     return price
 
 
-def Pay(params):
+def pay(params):
     card_num = params['card_num']
     cvv = params['cvv']
     if len(card_num) != 16 or not card_num.isdigit():
@@ -61,3 +61,15 @@ def Pay(params):
 
     price = calculate_price(params)
     return {"result": f'С карты {card_num} списано {price} руб', "error": ''}
+
+
+def refund(params):
+    card_num = params['card_num']
+    cvv = params['cvv']
+    if len(card_num) != 16 or not card_num.isdigit():
+        return {"result": '', "error": "Неверный номер карты"}
+
+    if len(cvv) != 3 or not cvv.isdigit():
+        return {"result": '', "error": "Неверный номер CVV/CVC"}
+    price = calculate_price(params)
+    return {"result": f'Cумма {price} была возвращена на карту {card_num}', "error": ''}
