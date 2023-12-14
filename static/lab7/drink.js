@@ -1,4 +1,3 @@
-
 function getPrice() {
     const milk = document.querySelector('[name=milk]').checked;
     const sugar = document.querySelector('[name=sugar]').checked;
@@ -24,9 +23,13 @@ function getPrice() {
     .then(function(data) {
         document.querySelector('#price').innerHTML = `Цена напитка: ${data.result} руб`;
         document.querySelector('#pay').style.display = '';
+        document.querySelector('#errorr').style.display = 'none';
+        document.querySelector('#resultt').style.display = 'none';
+        document.querySelector('#error').style.display = 'none';
+        document.querySelector('#result').style.display = 'none';
     })
-}
 
+}
 
 function pay() {
     const milk = document.querySelector('[name=milk]').checked;
@@ -57,6 +60,8 @@ function pay() {
     .then(function(data) {
         document.querySelector('#error').innerHTML = `${data.error}`;
         document.querySelector('#result').innerHTML = `${data.result}`;
+        document.querySelector('#error').style.display = '';
+        document.querySelector('#result').style.display = '';
     })
 }
 
@@ -88,9 +93,13 @@ function refund() {
     })
     
     .then(function(data) {
-        document.querySelector('#error').innerHTML = `${data.error}`;
-        document.querySelector('#result').innerHTML = `${data.result}`;
-        
+        document.querySelector('#errorr').innerHTML = `${data.errorr}`;
+        document.querySelector('#resultt').innerHTML = `${data.resultt}`;
+        document.querySelector('#error').style.display = 'none';
+        document.querySelector('#result').style.display = 'none';
+        document.querySelector('#pay').style.display = 'none';
+        document.querySelector('#errorr').style.display = '';
+        document.querySelector('#resultt').style.display = '';
     })
 
 }

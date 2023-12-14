@@ -67,9 +67,9 @@ def refund(params):
     card_num = params['card_num']
     cvv = params['cvv']
     if len(card_num) != 16 or not card_num.isdigit():
-        return {"result": '', "error": "Неверный номер карты"}
+        return {"resultt": '', "errorr": "Неверный номер карты"}
 
     if len(cvv) != 3 or not cvv.isdigit():
-        return {"result": '', "error": "Неверный номер CVV/CVC"}
+        return {"resultt": '', "errorr": "Неверный номер CVV/CVC"}
     price = calculate_price(params)
-    return {"result": f'Cумма {price} была возвращена на карту {card_num}', "error": ''}
+    return {"resultt": f'Cумма {price} была возвращена на карту {card_num}', "errorr": ''}
