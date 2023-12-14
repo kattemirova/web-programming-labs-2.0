@@ -90,6 +90,7 @@ function refund() {
     .then(function(data) {
         document.querySelector('#error').innerHTML = `${data.error}`;
         document.querySelector('#result').innerHTML = `${data.result}`;
+        
     })
 
 }
