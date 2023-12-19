@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    color: blue;
+    background: #cee5dd;
+}
+
+main{
+    margin-bottom: 40px;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+header {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: LightCyan;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background: LightCyan;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+img {
+    height: 250px;
+    width: 350px;
+    box-shadow: 0px 0px 15px 10px gray;
+    text-align: bottom;
+}

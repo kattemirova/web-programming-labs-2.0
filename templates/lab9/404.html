@@ -1,0 +1,16 @@
+{% extends "lab9/ng.html" %}
+
+{% block lab %}Лабораторная работа 9{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block main %}
+    <h1>Страница не найдена</h1>
+    <p>Кажется, вы попали не туда!</p>
+    <a href="/lab9/">Перейдите на главную страницу</a>
+    <p style="font-size: 20px; color: red;">Счастливого нового года!</p>
+    <div>❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️</div>
+    <img src="{{ url_for('static', filename='ng.jpg') }}">
+    <div>❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️</div>
+{% endblock %}

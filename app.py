@@ -20,6 +20,8 @@ from lab9 import lab9
 
 app = Flask(__name__)
 
+
+
 app.secret_key = "123"
 user_db = "temirova_pakhomova_knowledge_base_orm"
 host_ip = "127.0.0.1"
