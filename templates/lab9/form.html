@@ -1,0 +1,36 @@
+{% extends "lab9/ng.html" %}
+
+{% block lab %}Лабораторная работа 9{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block main %}
+    <h1>Поздравительная открытка</h1>
+
+    <form action="/lab9/form_show", method="get">
+        <h2>Ваше имя: </h2>
+        <div>
+            <input type="text" placeholder="Как вас зовут?" name="user" value="{{ user or '' }}">
+            <span class="error">{{ errors.user }}</span>
+        </div>
+
+        <h2>Имя получателя: </h2>
+        <div>
+            <input type="text" placeholder="Как зовут получателя?" name="user1" value="{{ user1 or '' }}">
+            <span class="error">{{ errors.user1 }}</span>
+        </div>
+
+        <h2>Пол получателя: </h2>
+        <div>
+            <select name="sex">
+                <option value="male" {{ sex == 'male' and 'selected' }}>Мужчина</option>
+                <option value="female" {{ sex == 'female' and 'selected' }}>Женщина</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit">Отправить поздравление</button>
+        </div>
+    </form>
+{% endblock %}

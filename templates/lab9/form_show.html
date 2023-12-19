@@ -1,0 +1,35 @@
+{% extends "lab9/ng.html" %}
+
+{% block lab %}Лабораторная работа 9{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block main %}
+    <div>❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️</div>
+    <div class='ticket'>
+        <div class="cont">
+            {% if sex == 'female' %}
+                <h2 style="text-align: center; width: auto; height: 30px; border: 1px soli; background-color: white; color: #c85649;">Дорогая {{ user1 }}!!!</h2>
+              
+                <h2>Поздравляю тебя с наступающим праздником!</h2>
+                <h2>Желаю быть самой счастливой в новом году❤️</h2>
+                <h2>❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️</h2>
+            {% elif sex == 'male' %}
+                <h2 style="text-align: center; width: auto; height: 30px; border: 1px soli; background-color: white;; color: #c85649;">Дорогой {{ user1 }}!!!</h2>
+                <h2>Поздравляю тебя с наступающим праздником!</h2>
+                <h2>Желаю быть самым счастливым в новом году❤️</h2><br>
+                <h2>❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️❄️❤️</h2>
+            {% endif %}
+        </div>
+        <div class="imga">
+            <img src="{{ url_for('static', filename='ng2.jpg') }}" />
+        </div>
+    
+            
+        <div class="cont"><h2 style="text-align: right; width: auto; height: 30px; border: 1px soli; background-color: white;; color: #c85649;">С любовью, {{ user }}❄️</h2></div>
+    
+    </div>
+    <div>❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️</div>
+
+{% endblock %}

@@ -36,3 +36,45 @@ img {
     box-shadow: 0px 0px 15px 10px gray;
     text-align: bottom;
 }
+
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: LightCyan;
+    box-shadow: 0px 0px 15px 10px gray;
+    text-align: center;
+    font-size: 14px;
+    padding: 8px 16px;
+    margin: 20px auto;
+    border: 1px solid;
+}
+
+
+.ticket {
+    position: relative; /* Добавим позиционирование, чтобы правильно расположить внутренние элементы */
+    width: 70%;
+
+    height: auto; /* Мы можем использовать auto вместо фиксированной высоты */
+    border: 1px solid #a8c6ce;
+    margin: 30px auto;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #a8c6ce;
+    font-size: 16px;
+    overflow: hidden; /* Это поможет родительскому блоку "ticket" обнаруживать высоту его потомков */
+}
+
+
+.cont {
+    float: left; /* Позволяет тексту быть слева */
+    width: 70%; 
+    color: #c85649;/* Ширина текста */
+}
+
+
+.imga {
+    float: right; /* Позволяет изображению быть справа *//* Увеличим ширину изображения */
+    margin-top: -150px; /* Поднимем изображение на 20px */
+
+}
+
+
